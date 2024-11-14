@@ -1,0 +1,254 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+body {
+  font-family: Arial, sans-serif;
+  background: #5D69F6;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  overflow: hidden;
+}
+.body-img{
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+}
+h1{
+  margin-top: 40px;
+  margin-bottom: 20px;
+  font-size: 50px;
+  font-weight: bold;
+  font-family: 'Times New Roman', Times, serif;
+  color: white;
+}
+h2{
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+#currentDate{
+  font-size: 20px;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+}
+#currentDesc{
+  font-size: 20px;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+}
+#cityInput{
+  width: 500px;
+}
+#currentHumidity{
+  margin-left: 10px;
+  margin-right: 70px;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  font-size: 20px;
+}
+#currentWindSpeed{
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  font-size: 20px;
+}
+.weather-icon {
+  width: 70px;
+  height: 70px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.weather-container {
+  justify-content: space-between;
+  width: 80%;
+  max-width: 800px;
+  margin: auto;
+  display: none;
+}
+.err{
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  font-size: 20px;
+}
+.current-weather{
+  margin-bottom: 20px;
+  background: rgba(215, 152, 249, 0.27);
+  padding: 20px;
+  height: 352px;
+  width: 248px;
+  border-radius: 12px;
+  box-shadow: inset 0px 4px 10px rgba(255, 255, 255, 1);;
+
+}
+.weather_page{
+  display: flow;
+}
+.forecast-desc{
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.current-weather, .forecast {
+  flex: 1;
+  margin: 10px;
+  text-align: center;
+}
+.forecast-day {
+  background: rgba(215, 152, 249, 0.27);
+  box-shadow: inset 0px 4px 10px rgba(255, 255, 255, 1);
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 200px;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+}
+.temperature {
+  font-size: 2em;
+  margin: 10px 0;
+}
+.button-container {
+  margin-top: 20px;
+}
+.forecast-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+button {
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background-color: #ffa500;
+  color: white;
+  transition: 0.3s;
+}
+
+.weather-others{
+  display: flex;
+  margin-top: 20px;
+}
+button:hover {
+  background-color: #ff8c00;
+}
+input[type="text"] {
+  padding: 10px;
+  font-size: 1em;
+  width: 80%;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 8px;
+}
+@media (max-width: 1300px) {
+  .current-weather{
+    margin-top: 0;
+  }
+  h1{
+    margin-top: 0;
+  }
+  .body-img{
+    height: 100%;
+  }
+  #cityInput{
+    width: 300px;
+  }
+}
+@media (max-width: 1030px) {
+  body{
+    font-size: 16px;
+
+  }
+  h2{
+    font-size: 20px;
+  }
+  #current-weather__text{
+    font-size: 15px;
+  }
+  .forecast-desc{
+    display: none;
+  }
+  #currentDesc{
+    display: none;
+  }
+  .current-weather{
+    height: 200px;
+    width: 486px;
+    margin: auto;
+  }
+  .weather-others{
+    display: none;
+  }
+  .weather-container{
+    flex-direction: column;
+  }
+  .body-img{
+    display: none;
+  }
+  .forecast-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+}
+@media (max-width: 700px) {
+  .current-weather{
+    max-height: 200px;
+    max-width: 200px;
+    margin: auto;
+  }
+  h2{
+    margin-bottom: 0px;
+    margin-top: 5px;
+  }
+  body{
+    overflow: auto;
+  }
+}

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Recipe App</title>
+  <link rel="stylesheet" href="../css/recipe.css">
+</head>
+<body>
+<header>
+  <h1>Recipe Finder</h1>
+  <input type="text" id="searchBar" placeholder="Search for recipes...">
+</header>
+
+<section id="recipeGrid" class="recipe-grid"></section>
+
+<!-- Recipe Modal -->
+<div id="recipeModal" class="modal">
+  <div class="modal-content" id="modalContent">
+    <h2 id="recipeTitle"></h2>
+    <img id="recipeImage" src="" alt="Recipe Image">
+    <p><strong>Preparation Time:</strong> <span id="prepTime"></span></p>
+
+    <h3>Ingredients</h3>
+    <ul id="ingredientsList"></ul>
+
+    <h3>Instructions</h3>
+    <ol id="instructionsList"></ol>
+
+    <h3>Nutritional Information</h3>
+    <p id="nutritionalInfo"></p>
+
+    <button id="addToFavoritesBtn" class="add-to-favorites-btn">Add to Favorites</button>
+  </div>
+</div>
+
+<div id="favoritesSection">
+  <h2>Your Favorite Recipes</h2>
+  <div id="favoritesContainer" class="favorites-container"></div>
+</div>
+<script src="../js/recipe.js"></script>
+</body>
+</html>
