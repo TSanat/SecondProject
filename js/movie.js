@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function searchMovies(query) {
     try {
+      searchResultsList.style.display = 'block';
       const response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${query}&api_key=940bd7b3a3bd75c839464accf9401226`);
       const data = await response.json();
       searchResultsList.innerHTML = '';
@@ -77,8 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
         movieItem.innerHTML = `
           <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
           <h3>${movie.title}</h3>
-          <div class="genre">Genre: ${movie.genre_ids.join(', ')}</div>
-          <div class="rating">Rating: ${movie.vote_average}</div>
+          <div class="genre">${movie.genre_ids.join(', ')}</div>
+          <div class="rating">${movie.vote_average}</div>
           <div class="year">Release Year: ${new Date(movie.release_date).getFullYear()}</div>
         `;
 
@@ -88,8 +89,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         resultsContainer.appendChild(movieItem);
       });
-
-      searchResultsSection.style.display = 'none';
+      searchResultsList.style.display = 'none';
+      document.getElementById('cartoonScroll').style.display = 'none';
+      document.getElementById('tvSeriesScroll').style.display = 'none';
+      document.querySelector('h2').style.display = 'none';
+      document.getElementById('movieListTitle').style.display = 'none';
+      document.getElementById('cartoonListTitle').style.display = 'none';
+      document.getElementById('tvSeriesListTitle').style.display = 'none';
       searchInput.value = '';
     } catch (error) {
       console.error('Error loading search results:', error);
@@ -129,8 +135,8 @@ document.addEventListener('DOMContentLoaded', () => {
         movieItem.innerHTML = `
           <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
           <h3>${movie.title}</h3>
-          <div class="genre">Genre: ${movie.genre_ids.join(', ')}</div>
-          <div class="rating">Rating: ${movie.vote_average}</div>
+          <div class="genre">${movie.genre_ids.join(', ')}</div>
+          <div class="rating">${movie.vote_average}</div>
           <div class="year">Release Year: ${new Date(movie.release_date).getFullYear()}</div>
         `;
 
@@ -159,8 +165,8 @@ document.addEventListener('DOMContentLoaded', () => {
         cartoonItem.innerHTML = `
           <img src="https://image.tmdb.org/t/p/w500${cartoon.poster_path}" alt="${cartoon.title}">
           <h3>${cartoon.title}</h3>
-          <div class="genre">Genre: Animation</div>
-          <div class="rating">Rating: ${cartoon.vote_average}</div>
+          <div class="genre">Animation</div>
+          <div class="rating">${cartoon.vote_average}</div>
           <div class="year">Release Year: ${new Date(cartoon.release_date).getFullYear()}</div>
         `;
 
@@ -188,8 +194,8 @@ document.addEventListener('DOMContentLoaded', () => {
         tvSeriesItem.innerHTML = `
           <img src="https://image.tmdb.org/t/p/w500${tvSeries.poster_path}" alt="${tvSeries.name}">
           <h3>${tvSeries.name}</h3>
-          <div class="genre">Genre: ${tvSeries.genre_ids.join(', ')}</div>
-          <div class="rating">Rating: ${tvSeries.vote_average}</div>
+          <div class="genre">${tvSeries.genre_ids.join(', ')}</div>
+          <div class="rating">${tvSeries.vote_average}</div>
           <div class="year">Release Year: ${new Date(tvSeries.first_air_date).getFullYear()}</div>
         `;
 
@@ -203,6 +209,33 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error('Error loading TV series:', error);
     }
   }
+  let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    function addFavoriteButton(movieId) {
+      const heartIcon = document.createElement('span');
+      heartIcon.classList.add('favorite-button');
+      heartIcon.innerHTML = '&#10084;';
+
+      if (favorites.includes(movieId)) {
+        heartIcon.style.color = 'red';
+      } else {
+        heartIcon.style.color = 'gray';
+      }
+
+      heartIcon.addEventListener('click', () => {
+        if (favorites.includes(movieId)) {
+          favorites = favorites.filter(id => id !== movieId);
+          heartIcon.style.color = 'gray';
+        } else {
+          favorites.push(movieId);
+          heartIcon.style.color = 'red';
+        }
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+      });
+
+      return heartIcon;
+    }
+  localStorage.setItem('favorites', JSON.stringify(favorites));
 
   function openModal(item) {
     const modalContent = document.querySelector('.modal-content');
@@ -210,30 +243,85 @@ document.addEventListener('DOMContentLoaded', () => {
 
     modalContent.innerHTML = `
       <span class="close-btn">&times;</span>
-      <div class="modal-info">
-        <div class="modal-left">
-          <img class="modal-img" src="https://image.tmdb.org/t/p/w500${item.poster_path}" alt="${item.title || item.name}">
-        </div>
-        <div class="modal-flex">
-          <h2>${item.title || item.name}</h2>
-          <div><strong>Release Year:</strong> ${new Date(item.release_date || item.first_air_date).getFullYear()}</div>
-          <div><strong>Country:</strong> ${item.origin_country ? item.origin_country.join(', ') : 'N/A'}</div>
-          <div><strong>Genre:</strong> ${item.genre_ids ? item.genre_ids.join(', ') : 'N/A'}</div>
-          <div><strong>Director:</strong> ${item.director || 'N/A'}</div>
-          <div><strong>Actors:</strong> ${item.actors || 'N/A'}</div>
+        <div class="modal-info">
+          <div class="modal-left">
+            <img class="modal-img" src="https://image.tmdb.org/t/p/w500${item.poster_path}" alt="${item.title || item.name}">
+          </div>
+          <div class="modal-flex">
+            <h2>${item.title || item.name}</h2>
+            <div><strong>Release Year:</strong> ${new Date(item.release_date || item.first_air_date).getFullYear()}</div>
+            <div><strong>Country:</strong> ${item.origin_country ? item.origin_country.join(', ') : 'N/A'}</div>
+            <div><strong>Genre:</strong> ${item.genre_ids ? item.genre_ids.join(', ') : 'N/A'}</div>
+            <div><strong>Director:</strong> ${item.director || 'N/A'}</div>
+            <div><strong>Actors:</strong> ${item.actors || 'N/A'}</div>
         </div>
       </div>
 
       <div>
-        <strong>About:</strong>
-        <p>${item.overview || 'No description available.'}</p>
+      <strong>About:</strong>
+      <p>${item.overview || 'No description available.'}</p>
       </div>
     `;
 
-    attachCloseButton();
-  }
+      const closeButton = modalContent.querySelector('.close-btn');
+      closeButton.parentNode.insertBefore(addFavoriteButton(item.id), closeButton.nextSibling);
 
-  loadMovies();
-  loadCartoons();
-  loadTVSeries();
+      closeButton.addEventListener('click', () => {
+        modal.style.display = 'none'; // Скрыть модальное окно
+      });
+    }
+
+    const favoritesButton = document.getElementById('favoritesButton');
+    favoritesButton.addEventListener('click', () => {
+      const movieScroll = document.getElementById('movieScroll');
+      movieScroll.innerHTML = '';
+      searchResultsList.style.display = 'none';
+      document.getElementById('cartoonScroll').style.display = 'none';
+      document.getElementById('tvSeriesScroll').style.display = 'none';
+      document.getElementById('movieListTitle').innerHTML = 'Favorites';
+      document.getElementById('cartoonListTitle').style.display = 'none';
+      document.getElementById('tvSeriesListTitle').style.display = 'none';
+
+      const favoriteContainer = document.getElementById('movieScroll');
+
+      async function fetchFavoriteMovies() {
+        const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        if (favorites.length === 0) {
+          favoriteContainer.innerHTML = '<p>No favorite movies found.</p>';
+          return;
+        }
+
+        favoriteContainer.innerHTML = '';
+
+        for (const movieId of favorites) {
+          try {
+            const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=940bd7b3a3bd75c839464accf9401226`);
+            const movie = await response.json();
+            displayMovie(movie);
+          } catch (error) {
+            console.error('Ошибка при загрузке фильма:', error);
+          }
+        }
+      }
+
+      function displayMovie(movie) {
+        const movieElement = document.createElement('div');
+        movieElement.classList.add('movie-item');
+
+        movieElement.innerHTML = `
+          <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+          <h3>${movie.title}</h3>
+          <p>Release Year: ${new Date(movie.release_date).getFullYear()}</p>
+          <p>Rating: ${movie.vote_average}</p>
+        `;
+
+        favoriteContainer.appendChild(movieElement);
+      }
+
+      fetchFavoriteMovies();
+    });
+
+    loadMovies();
+    loadCartoons();
+    loadTVSeries();
 });

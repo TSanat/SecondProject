@@ -53,7 +53,6 @@ body {
   background-color: #ffffff;
   color: #333;
   padding-top: 70px;
-  overflow: hidden;
 }
 
 .container {
@@ -146,14 +145,9 @@ header #siteName {
 #greenCircle{
   margin-right: -5px;
 }
-.movie-scroll,
-.cartoon-scroll,
-.tvSeriesScroll {
-  overflow: scroll;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+.logo-container{
+  cursor: pointer;
 }
-
 .movie-scroll::-webkit-scrollbar,
 .cartoon-scroll::-webkit-scrollbar,
 .tvSeriesScroll::-webkit-scrollbar {
@@ -167,6 +161,12 @@ header #siteName {
   background-color: #f2eff3;
   border-radius: 10px;
   border: 1px solid #ddd;
+}
+.favorites-button{
+  font-size: 17px;
+  cursor: pointer;
+  margin-left: 10px;
+  vertical-align: middle;
 }
 
 .filter-button {
@@ -198,11 +198,11 @@ h2 {
   justify-content: center;
   align-items: center;
   max-height: 200px;
-  overflow-y: auto;
-  background-color: white;
+  overflow: hidden;
+  background-color: #32cd32;
   border: 1px solid #ccc;
   z-index: 20;
-
+  border-radius: 10px;
 }
 
 #searchResults ul {
@@ -226,15 +226,11 @@ h2 {
   color: #333;
 }
 #movieLists .container{
-  height: 75vh;
   overflow-x: auto;
   white-space: nowrap;
   width: 100%;
-  webkit-overflow-scrolling: touch;
 }
 .movie-scroll {
-  overflow-x: auto;
-  overflow-y: auto;
   margin-top: 20px;
   padding-bottom: 20px;
   gap: 15px;
@@ -250,7 +246,6 @@ h2 {
   margin-right: 15px;
   background-color: #fff;
   border-radius: 8px;
-  overflow: hidden;
   cursor: pointer;
   position: relative;
   height: 450px;
@@ -276,10 +271,6 @@ strong{
   background-color: #222;
   color: #fff;
   margin-bottom: 10px;
-}
-.movieLists__wrapper .container{
-  width: 100vw;
-  webkit-overflow-scrolling: touch;
 }
 .movie-item .genre {
   font-size: 14px;
