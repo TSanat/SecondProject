@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Search</title>
+  <link rel="stylesheet" href="../css/movie.css">
+</head>
+<body>
+<!-- Header Section -->
+<header id="header">
+  <div class="container">
+    <div class="header__wrapper">
+      <div class="logo-container">
+        <div class="circle green" id="greenCircle"></div>
+        <div class="circle green"></div>
+        <h1 id="siteName">kino.kz</h1>
+      </div>
+      <div class="button__language">
+        <button id="languageToggle" class="language-button">RU</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="searchSection">
+  <div class="container">
+    <input type="text" id="searchInput" placeholder="Search for a movie...">
+    <button id="filterButton" class="filter-button">filter</button>
+  </div>
+</section>
+
+
+<section id="movieLists">
+  <div class="container">
+    <div class="movieLists__wrapper">
+      <h2 id="movieListTitle">New Movies</h2>
+      <div class="container">
+        <div id="movieScroll" class="movie-scroll"></div>
+      </div>
+      <h2 id="cartoonListTitle">New Cartoons</h2>
+      <div class="container">
+        <div id="cartoonScroll" class="movie-scroll"></div>
+      </div>
+      <h2 id="tvSeriesListTitle">New TV Series</h2>
+      <div class="container">
+        <div id="tvSeriesScroll" class="movie-scroll"></div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<div id="movieModal" class="modal">
+  <div class="container">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <!-- Modal content will be dynamically injected here -->
+    </div>
+  </div>
+
+</div>
+
+<script src="../js/movie.js"></script>
+</body>
+</html>
